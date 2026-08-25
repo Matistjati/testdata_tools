@@ -484,6 +484,7 @@ include_group () {
 # Initialization and cleanup code, automatically included.
 _setup_dirs () {
   rm -rf secret
+  rm -f testdata.yaml
   mkdir -p sample secret
   if [[ $USE_SCORING == 1 ]]; then
     echo "on_reject: continue
