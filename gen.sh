@@ -496,8 +496,15 @@ grader_flags: first_error" > sample/testdata.yaml
 }
 _setup_dirs
 
+_wait_all_jobs () {
+  local pid
+  for pid in $(jobs -pr); do
+    wait "$pid" 2>/dev/null || true
+  done
+}
+
 _cleanup_programs () {
-  wait
+  _wait_all_jobs
   for x in "${cleanup[@]}"; do
     rm -f "$x"
   done
