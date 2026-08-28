@@ -496,6 +496,9 @@ grader_flags: first_error" > sample/testdata.yaml
 }
 _setup_dirs
 
+# Workaround for a bash bug where a normal `wait` can loop forever if the job list gets desynced
+# Bug report: https://www.mail-archive.com/bug-bash@gnu.org/msg35667.html
+# Fixed in bash 5.3.10 https://ftp.gnu.org/gnu/bash/bash-5.3-patches/bash53-010
 _wait_all_jobs () {
   local pid
   for pid in $(jobs -pr); do
